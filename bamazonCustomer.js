@@ -34,3 +34,114 @@
 // 8. However, if your store _does_ have enough of the product, you should fulfill the customer's order.
 //    * This means updating the SQL database to reflect the remaining quantity.
 //    * Once the update goes through, show the customer the total cost of their purchase.
+
+
+// prompt
+	// welcome to Bamazon
+		// fucntion to display all of products (only display id name price only)
+		
+	
+
+
+// function showing all of products
+
+// function basic options
+	// prompt
+		// ask them to enter the id of the product they would like to buy
+		// promise
+			// if they entered the id, then run buying function
+			// if no, exit
+
+// function for buying
+	// prompt
+		// ask quanity of item to purchase	
+			// store id
+			// store quantity
+			// run function for purchasing
+
+// function for purchasing
+	// if quanity not avail
+		// log sorry, not avail
+	// if quanity avail, 
+		// get the total cost
+		// display						
+
+
+
+
+
+
+
+
+
+
+
+// additions/ideas
+
+
+// prompt
+	// welcome to Bamazon
+		// display all of products (only display id name price only)
+	// Would you like to refine your search?
+		// if not, then run basic options function
+		// if yes, run additional options function
+	
+
+
+// function showing all of products
+
+// function basic options
+	// prompt
+		// ask them to enter the id of the product they would like to buy
+
+// function additional options
+	// list
+		// ask user to search by 
+			// price (low to high)
+			// item id
+			// product name
+			// department			
+
+
+// function showing all of products by price
+	// prompt
+		// ask, sort by low to high or high to low
+			// list
+				// low to high
+				// high to low
+		// list them		
+
+
+// function showing all items by id
+
+// function showing product names sorted
+	// prompt
+		// ask how they would like the products sorted
+			// list
+				// by a-z
+				// by z-a
+	// list them
+
+// function showing products by department
+	// prompt
+		// list
+			// list of departments to select
+	// show items only in the specific department selected						
+
+
+// function for placing an order
+	// prompt
+		// then ask how many units of the product they would like to buy
+			// check if there is enough stock
+		// place order
+			// update database
+			// show purchase total
+		// if not enough quantity, then display insufficient quantity, and show the quanitity available
+
+
+
+
+
+
+
+
