@@ -1,25 +1,44 @@
-// ### Challenge #2: Manager View (Next Level)
+// MANAGER VIEW
 
-// * Create a new Node application called `bamazonManager.js`. Running this application will:
+// PROMPT
+	// list of choices:
+		// View Products for Sale
+		// View Low Inventory
+		// Add to Inventory
+		// Add New Product
+	// THEN
+		// switch
+			// functions for corresponding responses
 
-//   * List a set of menu options:
 
-//     * View Products for Sale
-    
-//     * View Low Inventory
-    
-//     * Add to Inventory
-    
-//     * Add New Product
 
-//   * If a manager selects `View Products for Sale`, the app should list every available item: the item IDs, names, prices, and quantities.
+// VIEW PRODUCTS FOR SALE 
+//function showing all of products (item id, name, price, quantity)
+function showProducts() {
+    connection.query('SELECT * FROM products', function(error, response) {
+        if (error) console.log(error);
+        console.log(response);
+        purchasePrompt();
+    });
+}
 
-//   * If a manager selects `View Low Inventory`, then it should list all items with an inventory count lower than five.
+// VIEW LOW INVENTORY 
+//function to view inventory via lower than 5
+function viewLowInventory() {
 
-//   * If a manager selects `Add to Inventory`, your app should display a prompt that will let the manager "add more" of any item currently in the store.
+}
 
-//   * If a manager selects `Add New Product`, it should allow the manager to add a completely new product to the store.
+// ADD TO INVENTORY 
+//function to add to inventory (already existing)
+// prompt
+// add more to inventory
+function addInventory() {
 
-// - - -
+}
 
-// * If you finished Challenge #2 and put in all the hours you were willing to spend on this activity, then rest easy! Otherwise continue to the next and final challenge.
+// ADD NEW PRODUCT function to create a new product
+// prompt
+// add compelety new product
+function createNewProduct() {
+
+}

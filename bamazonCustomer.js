@@ -1,3 +1,4 @@
+// CUSTOMER VIEW
 
 // dependencies used
 var mysql = require('mysql');
