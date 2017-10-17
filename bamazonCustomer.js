@@ -1,76 +1,76 @@
-// ## Instructions
 
-// ### Challenge #1: Customer View (Minimum Requirement)
+// dependencies used
+var mysql = require('mysql');
+var inquirer = require('inquirer');
 
-// 1. Create a MySQL Database called `bamazon`.
-
-// 2. Then create a Table inside of that database called `products`.
-
-// 3. The products table should have each of the following columns:
-
-//    * item_id (unique id for each product)
-
-//    * product_name (Name of product)
-
-//    * department_name
-
-//    * price (cost to customer)
-
-//    * stock_quantity (how much of the product is available in stores)
-
-// 4. Populate this database with around 10 different products. (i.e. Insert "mock" data rows into this database and table).
-
-// 5. Then create a Node application called `bamazonCustomer.js`. Running this application will first display all of the items available for sale. Include the ids, names, and prices of products for sale.
-
-// 6. The app should then prompt users with two messages.
-
-//    * The first should ask them the ID of the product they would like to buy.
-//    * The second message should ask how many units of the product they would like to buy.
-
-// 7. Once the customer has placed the order, your application should check if your store has enough of the product to meet the customer's request.
-
-//    * If not, the app should log a phrase like `Insufficient quantity!`, and then prevent the order from going through.
-
-// 8. However, if your store _does_ have enough of the product, you should fulfill the customer's order.
-//    * This means updating the SQL database to reflect the remaining quantity.
-//    * Once the update goes through, show the customer the total cost of their purchase.
+// database connection
+var connection = mysql.createConnection({
+    host: "127.0.0.1",
+    port: 8889,
+    user: "root", 
+    password: "root", 
+    database: "Bamazon_DB"
+});
 
 
-// prompt
-	// welcome to Bamazon
-		// fucntion to display all of products (only display id name price only)
-		
-	
+console.log("Welcome to Bamazon!");
+showProducts();
 
 
 // function showing all of products
+function showProducts() {
+	connection.query('SELECT * FROM products', function(error, response) {
+        if (error) console.log(error);
+    
+        console.log(response);
+        purchasePrompt();
+    });
+}
 
-// function basic options
-	// prompt
-		// ask them to enter the id of the product they would like to buy
-		// promise
-			// if they entered the id, then run buying function
-			// if no, exit
 
 // function for buying
-	// prompt
-		// ask quanity of item to purchase	
-			// store id
-			// store quantity
-			// run function for purchasing
+function purchasePrompt() {
+	inquirer.prompt([
+
+        {
+            name: "product_id",
+            type: "input",
+            message: "Please enter the item number of the product you would like to purchase."
+        }, {
+            name: 'product_quantity',
+            type: 'input',
+            message: "How many will you be ordering?"
+        },
+
+    ]).then(function(answers) {
+        var saleQuantity = answers.product_quantity;
+        var saleID = answers.product_id;
+        purchaseOrder(saleID, saleQuantity);
+    });
+
+}
 
 // function for purchasing
-	// if quanity not avail
-		// log sorry, not avail
-	// if quanity avail, 
-		// get the total cost
-		// display						
+function purchaseOrder(id, quantity) {
+    connection.query('SELECT * FROM products WHERE item_id = ' + id, function(error, response) {
+        if (error) console.log(error);
 
+        //if in stock
+        if (quantity <= response[0].stock_quantity) {
+            //calculate cost
+            var saleTotal = response[0].price * quantity;
+            //inform user
+            console.log("Order placed!");
+            console.log("Total for " + quantity + " " + response[0].product_name + " is $" + saleTotal + ". Pay up!");
+            //update database, minus purchased quantity
+            connection.query('UPDATE products SET stock_quantity = stock_quantity - ' + quantity + ' WHERE item_id = ' + id);
+        } else {
+            console.log("Insufficient quantity for " + response[0].product_name + ".");
+        }
+        // run again? showProducts();
+    });
 
-
-
-
-
+} 
 
 
 
